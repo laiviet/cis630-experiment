@@ -12,7 +12,7 @@ export NCCL_DEBUG_SUBSYS=ALL
 
 NODE=1
 GPU=2
-WORLD_SIZE=$(expr $NODE * $GPU)
+WORLD_SIZE=$(expr $NODE \* $GPU)
 export WORLD_SIZE=$WORLD_SIZE
 if [[ $HOSTNAME == "node-0.test-code.cis630dnn-pg0.clemson.cloudlab.us" ]] ; then
   echo "NOde 0"
