@@ -14,12 +14,12 @@ NODE=1
 GPU=2
 export WORLD_SIZE=$(expr $NODE * $GPU)
 
-if [[ $HOSTNAME=="node-0.test-code.cis630dnn-pg0.clemson.cloudlab.us" ]] ; then
+if [[ $HOSTNAME == "node-0.test-code.cis630dnn-pg0.clemson.cloudlab.us" ]] ; then
   echo "NOde 0"
   NODE_RANK=0 LOCAL_RANK=0 python resnet.py --gpu $GPU --node $NODE &
 fi
 
-if [[ $HOSTNAME=="node-1.test-code.cis630dnn-pg0.clemson.cloudlab.us" ]] ; then
+if [[ $HOSTNAME == "node-1.test-code.cis630dnn-pg0.clemson.cloudlab.us" ]] ; then
   echo "NOde 1"
   NODE_RANK=1 LOCAL_RANK=0 python resnet.py  --gpu $GPU --node $NODE &
 fi
