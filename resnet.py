@@ -15,6 +15,7 @@ from torchvision import transforms
 from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader
 import pytorch_lightning as ptl
+from constant import DATASETS
 
 
 # Here we define a new class to turn the ResNet model that we want to use as a feature extractor
@@ -146,16 +147,14 @@ if __name__ == '__main__':
     parser = ArgumentParser()
     # Required arguments
     parser.add_argument('--model', default=18, choices=[18, 34, 50, 101, 152], type=int)
-    parser.add_argument('--num_classes', default=18, help='Number of classes to be learned.', type=int)
+    parser.add_argument('--num_classes', default=0, help='Number of classes to be learned.', type=int)
     parser.add_argument('--num_epochs', default=20, help='Number of Epochs to Run.', type=int)
-    parser.add_argument('--train_set', default='data/debug/test', help='Path to training data folder.', type=Path)
-    parser.add_argument('--vld_set', default='data/debug/test', help='Path to validation set folder.', type=Path)
-    # Optional arguments
-    parser.add_argument('-ts', '--test_set', default='data/debug/test', help='Optional test set path.', type=Path)
+    parser.add_argument('--dataset', default='tiny', choices=['debug', 'tiny', 'mini'])
+
     parser.add_argument('-o', '--optimizer', help='PyTorch optimizer to use. Defaults to adam.', default='adam')
     parser.add_argument('-lr', '--learning_rate', help='Adjust learning rate of optimizer.', type=float, default=1e-3)
     parser.add_argument('-b', '--batch_size', help='Manually determine batch size. Defaults to 16.',
-                        type=int, default=256)
+                        type=int, default=16)
     parser.add_argument('-tr', '--transfer',
                         help='Determine whether to use pretrained model or train from scratch. Defaults to True.',
                         action='store_true')
@@ -164,11 +163,10 @@ if __name__ == '__main__':
     parser.add_argument('--gpu', help='Number of GPUs', type=int, default=1)
     args = parser.parse_args()
 
-
-
     # # Instantiate Model
-    model = ResNetClassifier(args.num_classes, args.model, args.train_set,
-                             args.vld_set, args.test_set, args.optimizer,
+    d = DATASETS[args.dataset]
+    model = ResNetClassifier(d['class'], args.model, d['train'],
+                             d['dev'], d['test'], args.optimizer,
                              args.learning_rate, args.batch_size, args.transfer)
     # Instantiate lightning trainer and train model
 
