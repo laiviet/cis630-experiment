@@ -45,8 +45,9 @@ To run the experiment, you should run this on all nodes.
 ./run.sh
 ```
 
+## Credits
 
-
+The source code is developed from the ResNet version of https://github.com/Stevellen/ResNet-Lightning
 
 
 
