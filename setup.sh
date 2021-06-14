@@ -19,7 +19,7 @@ export PATH=/users/laiviet/miniconda3/bin:$PATH
 # Setup conda environment
 conda create -n py39 python=3.9
 conda activate py39
-conda install pytorch -c pytorch
+conda install pytorch==1.6.0 -c pytorch
 conda install torchvision -c pytorch
 pip install pytorch_lightning
 
