@@ -17,7 +17,7 @@ Hardware: Nvidia RTX 2080Ti
 
 OS: Ubuntu 18.04
 
-Software: Python3, Pytorch, Pytorch Lightning
+Software: Python3, Pytorch 1.6.0 , Pytorch Lightning. PyTorch Lighting does not seem to work properly wwith newer PyTorch. So please stick to PyTorch 1.6.0
 
 
 ## Installation
